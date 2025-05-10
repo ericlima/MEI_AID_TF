@@ -1,0 +1,1 @@
+keytool -genkeypair -alias meu-certificado -keyalg RSA -keysize 4096 -validity 365 -keystore mei_aid.jks -storepass aluno123 -keypass aluno123 -dname "CN=mei.aid.local, OU=TI, O=IPCB, L=Castelo Branco, ST=Lisboa, C=PT"

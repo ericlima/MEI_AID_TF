@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  naming_server:
+    build:
+        context: ./NamingServer
+        dockerfile: Dockerfile
+    container_name: name-server
+    ports:
+      - "8761:8761"
+    networks:
+      - aid_network
+    restart: always
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - aid_network
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+networks:
+    aid_network:
+   
