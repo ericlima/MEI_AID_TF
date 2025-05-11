@@ -95,6 +95,22 @@ services:
       - aid_network
     restart: always
 
+  medicamento:
+    build:
+        context: ./Medicamento
+        dockerfile: Dockerfile
+    container_name: medicamento
+    hostname: medicamento
+    environment:
+      POSTGRES_DB: medicamento
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8060:8060"
+    networks:
+      - aid_network
+    restart: always
+
 volumes:
   postgres_data:
 
