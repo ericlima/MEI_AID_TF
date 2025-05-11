@@ -1,30 +1,47 @@
 package pt.ipcb.mei.aid.user.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
-@Table(name="user")
-public class user {
+@Table(name="MEDITRACK_USER")
+public class User extends Auditable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false)
+    private String userName;
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = true)
     private String email;
+    @Column(nullable = true)
     private String telefone;
+    @Column(nullable = true)
     private String numUtente;
-    private LocalDate dataNascita;
+    @Past(message = "A data de nascimento deve estar no passado")
+    private LocalDate dataNascto;
+    @Column(nullable = true)
     private String codigoPostal;
+    @Column(nullable = true)
     private String morada;
+    @Column(nullable = true)
     private String cidade;
+    @Column(nullable = true)
     private String pais;
+    @Column(nullable = true)
     private String pin;
+    @NotNull(message = "A data de aceitação dos termos é obrigatória")
+    @PastOrPresent(message = "A data de aceitação não pode estar no futuro")
     private LocalDateTime terms;
 
-    public user() {
+    public User() {
     }
 
     public long getId() {
@@ -65,14 +82,6 @@ public class user {
 
     public void setNumUtente(String numUtente) {
         this.numUtente = numUtente;
-    }
-
-    public LocalDate getDataNascita() {
-        return dataNascita;
-    }
-
-    public void setDataNascita(LocalDate dataNascita) {
-        this.dataNascita = dataNascita;
     }
 
     public String getCodigoPostal() {
@@ -121,5 +130,25 @@ public class user {
 
     public void setTerms(LocalDateTime terms) {
         this.terms = terms;
+    }
+
+    public void setTerms(String terms) {
+        this.terms = LocalDateTime.parse(terms, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public LocalDate getDataNascto() {
+        return dataNascto;
+    }
+
+    public void setDataNascto(LocalDate dataNascto) {
+        this.dataNascto = dataNascto;
     }
 }
