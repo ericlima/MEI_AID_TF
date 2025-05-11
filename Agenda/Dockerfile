@@ -9,7 +9,7 @@ COPY target/*.jar app.jar
 #COPY src/main/resources/mei_aid.jks mei_aid.jks
 
 # Expõe a porta que o Eureka Server usará
-EXPOSE 8010
+EXPOSE 8040
 
 # Define o comando de inicialização da aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]

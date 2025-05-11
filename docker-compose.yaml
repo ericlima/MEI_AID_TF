@@ -4,6 +4,7 @@ services:
   postgres:
     image: postgres:16
     container_name: postgres
+    hostname: postgres
     restart: always
     environment:
       POSTGRES_DB: postgres
@@ -16,19 +17,16 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  naming_server:
+  name-server:
     build:
         context: ./NamingServer
         dockerfile: Dockerfile
     container_name: name-server
+    hostname: name-server
     ports:
       - "8761:8761"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://name-server:8761/actuator/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      test: ["CMD", "curl -s http://name-server:8761/ping"]
     networks:
       - aid_network
     restart: always
@@ -38,15 +36,32 @@ services:
         context: ./User
         dockerfile: Dockerfile
     container_name: user
+    hostname: user
+    environment:
+      POSTGRES_DB: user
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "8010:8010"
-    depends_on:
-      name-server:
-        condition: service_healthy
     networks:
       - aid_network
     restart: always
 
+  agenda:
+    build:
+        context: ./Agenda
+        dockerfile: Dockerfile
+    container_name: agenda
+    hostname: agenda
+    environment:
+      POSTGRES_DB: agenda
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8040:8040"
+    networks:
+      - aid_network
+    restart: always
 
 volumes:
   postgres_data:
