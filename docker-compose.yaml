@@ -31,6 +31,18 @@ services:
       - aid_network
     restart: always
 
+  api-gateway:
+    build:
+        context: ./API_Cloud_Gateway
+        dockerfile: Dockerfile
+    container_name: api-gateway
+    hostname: api-gateway
+    ports:
+      - "8755:8755"
+    networks:
+      - aid_network
+    restart: always
+
   user:
     build:
         context: ./User
