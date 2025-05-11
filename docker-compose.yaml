@@ -1,17 +1,6 @@
 version: '3.8'
 
 services:
-  naming_server:
-    build:
-        context: ./NamingServer
-        dockerfile: Dockerfile
-    container_name: name-server
-    ports:
-      - "8761:8761"
-    networks:
-      - aid_network
-    restart: always
-
   postgres:
     image: postgres:16
     container_name: postgres
@@ -26,6 +15,38 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  naming_server:
+    build:
+        context: ./NamingServer
+        dockerfile: Dockerfile
+    container_name: name-server
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://name-server:8761/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - aid_network
+    restart: always
+
+  user:
+    build:
+        context: ./User
+        dockerfile: Dockerfile
+    container_name: user
+    ports:
+      - "8010:8010"
+    depends_on:
+      name-server:
+        condition: service_healthy
+    networks:
+      - aid_network
+    restart: always
+
 
 volumes:
   postgres_data:
