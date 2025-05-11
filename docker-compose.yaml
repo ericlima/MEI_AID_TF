@@ -63,6 +63,23 @@ services:
       - aid_network
     restart: always
 
+  receitas:
+    build:
+        context: ./Receitas
+        dockerfile: Dockerfile
+    container_name: receitas
+    hostname: receitas
+    environment:
+      POSTGRES_DB: receitas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8020:8020"
+    networks:
+      - aid_network
+    restart: always
+
+
 volumes:
   postgres_data:
 
