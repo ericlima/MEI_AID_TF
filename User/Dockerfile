@@ -5,11 +5,11 @@ FROM eclipse-temurin:24-jdk AS builder
 WORKDIR /app
 
 # Copia o JAR gerado para dentro do container
-COPY target/NamingServer-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar app.jar
 COPY src/main/resources/mei_aid.jks mei_aid.jks
 
 # Expõe a porta que o Eureka Server usará
-EXPOSE 8761
+EXPOSE 8010
 
 # Define o comando de inicialização da aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
