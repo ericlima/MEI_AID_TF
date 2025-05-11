@@ -79,6 +79,21 @@ services:
       - aid_network
     restart: always
 
+  estoque:
+    build:
+        context: ./Estoque
+        dockerfile: Dockerfile
+    container_name: estoque
+    hostname: estoque
+    environment:
+      POSTGRES_DB: estoque
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8050:8050"
+    networks:
+      - aid_network
+    restart: always
 
 volumes:
   postgres_data:
