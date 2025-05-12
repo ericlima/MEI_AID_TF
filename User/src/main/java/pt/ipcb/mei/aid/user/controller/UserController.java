@@ -2,6 +2,7 @@ package pt.ipcb.mei.aid.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pt.ipcb.mei.aid.user.model.User;
 import pt.ipcb.mei.aid.user.model.UserDTO;
@@ -77,10 +78,15 @@ public class UserController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<UserDTO> obterPorNome(@RequestBody UserNameDTO userName) {
+    @GetMapping("/username")
+    public ResponseEntity<?> obterPorNome(@ModelAttribute UserNameDTO userDTO, BindingResult result) {
         try {
-            Optional<User> user = userRepository.findUserByUserName(userName.getUserName());
+
+            if (result.hasErrors()) {
+                return ResponseEntity.badRequest().body(result.getAllErrors());
+            }
+
+            Optional<User> user = userRepository.findUserByUserName(userDTO.getUserName());
 
             if (user.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

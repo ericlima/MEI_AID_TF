@@ -15,7 +15,7 @@ public class User extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userName;
     @Column(nullable = false)
     private String nome;
@@ -23,7 +23,7 @@ public class User extends Auditable {
     private String email;
     @Column(nullable = true)
     private String telefone;
-    @Column(nullable = true)
+    @Column(nullable = true, unique = true)
     private String numUtente;
     @Past(message = "A data de nascimento deve estar no passado")
     private LocalDate dataNascto;
