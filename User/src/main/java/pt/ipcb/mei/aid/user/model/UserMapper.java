@@ -17,7 +17,6 @@ public class UserMapper {
         dto.setMorada(user.getMorada());
         dto.setCidade(user.getCidade());
         dto.setPin(user.getPin());
-        dto.setPin(user.getPin());
         dto.setTelefone(user.getTelefone());
         dto.setTerms(user.getTerms().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         dto.setData_criacao(user.getDatahoraCriacao());;
@@ -36,7 +35,6 @@ public class UserMapper {
         usr.setCodigoPostal(user.getCodigoPostal());
         usr.setMorada(user.getMorada());
         usr.setCidade(user.getCidade());
-        usr.setPin(user.getPin());
         usr.setPin(user.getPin());
         usr.setTelefone(user.getTelefone());
         usr.setTerms(user.getTerms());
