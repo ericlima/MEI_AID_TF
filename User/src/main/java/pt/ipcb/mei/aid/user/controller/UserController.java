@@ -101,9 +101,14 @@ public class UserController {
     }
 
     @GetMapping("/utente")
-    public ResponseEntity<UserDTO> obterPorUtente(@RequestBody UserNameDTO userName) {
+    public ResponseEntity<?> obterPorUtente(@ModelAttribute UserNameDTO userDTO, BindingResult result) {
         try {
-            Optional<User> user = userRepository.findUserByNumUtente(userName.getNumUtente());
+
+            if (result.hasErrors()) {
+                return ResponseEntity.badRequest().body(result.getAllErrors());
+            }
+
+            Optional<User> user = userRepository.findUserByNumUtente(userDTO.getNumUtente());
 
             if (user.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

@@ -20,6 +20,8 @@ public class UserMapper {
         dto.setPin(user.getPin());
         dto.setTelefone(user.getTelefone());
         dto.setTerms(user.getTerms().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        dto.setData_criacao(user.getDatahoraCriacao());;
+        dto.setData_atualizacao(user.getDatahoraAlteracao());
         return dto;
     }
 
