@@ -29,6 +29,16 @@ public class UserDTO {
     private String pin;
     private String terms;
 
+    private String genero;
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     public UserDTO() {
     }
 

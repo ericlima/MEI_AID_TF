@@ -41,6 +41,17 @@ public class User extends Auditable {
     @PastOrPresent(message = "A data de aceitação não pode estar no futuro")
     private LocalDateTime terms;
 
+    @Column(nullable = true)
+    private String genero;
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     public User() {
     }
 

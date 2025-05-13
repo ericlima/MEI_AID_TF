@@ -21,24 +21,26 @@ public class UserMapper {
         dto.setTerms(user.getTerms().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         dto.setData_criacao(user.getDatahoraCriacao());;
         dto.setData_atualizacao(user.getDatahoraAlteracao());
+        dto.setGenero(user.getGenero());
         return dto;
     }
 
-    public static User fromDTO(UserDTO user) {
-        User usr = new User();
-        usr.setUserName(user.getUserName());
-        usr.setNome(user.getNome());
-        usr.setEmail(user.getEmail());
-        usr.setTelefone(user.getTelefone());
-        usr.setDataNascto(user.getDataNascto());
-        usr.setNumUtente(user.getNumUtente());
-        usr.setCodigoPostal(user.getCodigoPostal());
-        usr.setMorada(user.getMorada());
-        usr.setCidade(user.getCidade());
-        usr.setPin(user.getPin());
-        usr.setTelefone(user.getTelefone());
-        usr.setTerms(user.getTerms());
-        return usr;
+    public static User fromDTO(UserDTO userDTO) {
+        User user = new User();
+        user.setUserName(userDTO.getUserName());
+        user.setNome(userDTO.getNome());
+        user.setEmail(userDTO.getEmail());
+        user.setTelefone(userDTO.getTelefone());
+        user.setDataNascto(userDTO.getDataNascto());
+        user.setNumUtente(userDTO.getNumUtente());
+        user.setCodigoPostal(userDTO.getCodigoPostal());
+        user.setMorada(userDTO.getMorada());
+        user.setCidade(userDTO.getCidade());
+        user.setPin(userDTO.getPin());
+        user.setTelefone(userDTO.getTelefone());
+        user.setTerms(userDTO.getTerms());
+        user.setGenero(userDTO.getGenero());
+        return user;
 
     }
 }
