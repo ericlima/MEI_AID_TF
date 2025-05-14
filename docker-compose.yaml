@@ -3,7 +3,7 @@ services:
     image: postgres:16
     container_name: postgres
     hostname: postgres
-    restart: always
+    restart: unless-stopped
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -27,7 +27,7 @@ services:
       test: ["CMD", "curl -s http://name-server:8761/ping"]
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
   api-gateway:
     build:
@@ -39,7 +39,7 @@ services:
       - "8755:8755"
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
   user:
     build:
@@ -55,7 +55,7 @@ services:
       - "8010:8010"
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
   agenda:
     build:
@@ -71,7 +71,7 @@ services:
       - "8040:8040"
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
   receitas:
     build:
@@ -87,7 +87,7 @@ services:
       - "8020:8020"
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
   estoque:
     build:
@@ -103,7 +103,7 @@ services:
       - "8050:8050"
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
   medicamento:
     build:
@@ -119,7 +119,7 @@ services:
       - "8060:8060"
     networks:
       - aid_network
-    restart: always
+    restart: unless-stopped
 
 volumes:
   postgres_data:
