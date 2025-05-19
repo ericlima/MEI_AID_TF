@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'login_screen.dart'; // <- substitua pelo caminho correto se necessário
+import 'login_screen.dart';
+import 'medicamentos_page.dart';
+import 'calendario_dia.dart';
+import 'adicionar_evento.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,13 +14,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  CalendarView _calendarView = CalendarView.month;
-  DateTime _focusedDay = DateTime.now();
+  final DateTime _focusedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1C1C1C),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => AdicionarEventoPage(date: DateTime.now()),
+            ),
+          );
+        },
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.add),
+      ),
+
       appBar: AppBar(
         title: const Text('Calendário', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
@@ -35,18 +51,10 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          _buildViewSelector(),
           Expanded(
             child: SfCalendar(
-              view: _calendarView,
+              view: CalendarView.month,
               initialDisplayDate: _focusedDay,
-              onViewChanged: (details) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  setState(() {
-                    _focusedDay = details.visibleDates.first;
-                  });
-                });
-              },
               firstDayOfWeek: 1,
               todayHighlightColor: Colors.teal,
               showDatePickerButton: true,
@@ -57,6 +65,18 @@ class _HomePageState extends State<HomePage> {
                 border: Border.all(color: Colors.teal),
                 borderRadius: BorderRadius.circular(8),
               ),
+              onTap: (CalendarTapDetails details) {
+                if (details.targetElement == CalendarElement.calendarCell &&
+                    details.date != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => CalendarioDiaPage(selectedDate: details.date!),
+                    ),
+                  );
+                }
+              },
             ),
           ),
           const SizedBox(height: 20),
@@ -67,9 +87,10 @@ class _HomePageState extends State<HomePage> {
                 _HomeButton(
                   text: 'Medicamentos',
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Navegar para Medicamentos'),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const MedicamentosPage(),
                       ),
                     );
                   },
@@ -89,37 +110,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildViewSelector() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      color: Colors.black87,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _calendarButton('Dia', CalendarView.day),
-          _calendarButton('Semana', CalendarView.week),
-          _calendarButton('Mês', CalendarView.month),
-        ],
-      ),
-    );
-  }
-
-  Widget _calendarButton(String label, CalendarView view) {
-    final isSelected = _calendarView == view;
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          _calendarView = view;
-        });
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.teal : Colors.grey[800],
-        foregroundColor: Colors.white,
-      ),
-      child: Text(label),
     );
   }
 

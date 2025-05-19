@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart'; // Certifique-se de ajustar o caminho conforme necessário
+import 'home_page.dart'; // Altere conforme seu projeto
+import 'novo_utilizador.dart'; // Altere conforme o local do arquivo
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,12 +27,12 @@ class _LoginScreenState extends State<LoginScreen> {
     if (name == 'admin' && pin == '1234') {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (_) => const HomePage()),
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Credenciais inválidas')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Credenciais inválidas')));
     }
   }
 
@@ -58,9 +59,14 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 40),
             const Icon(Icons.lock, size: 60, color: Colors.white),
             const SizedBox(height: 40),
+
+            // Campo de nome
             const Align(
               alignment: Alignment.centerLeft,
-              child: Text('Name', style: TextStyle(fontSize: 18, color: Colors.white70)),
+              child: Text(
+                'Name',
+                style: TextStyle(fontSize: 18, color: Colors.white70),
+              ),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -69,13 +75,20 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.black54,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
             const SizedBox(height: 24),
+
+            // Campo de PIN
             const Align(
               alignment: Alignment.centerLeft,
-              child: Text('PIN', style: TextStyle(fontSize: 18, color: Colors.white70)),
+              child: Text(
+                'PIN',
+                style: TextStyle(fontSize: 18, color: Colors.white70),
+              ),
             ),
             const SizedBox(height: 8),
             TextField(
@@ -87,7 +100,9 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.black54,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -99,21 +114,56 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: _togglePinVisibility,
                     ),
                     IconButton(
-                      icon: const Icon(Icons.arrow_forward, color: Colors.white),
+                      icon: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                      ),
                       onPressed: _validateLogin,
                     ),
                   ],
                 ),
               ),
             ),
+
+            const SizedBox(height: 16),
+
+            // Botão "New User"
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const NovoUtilizador()),
+                  );
+                },
+                child: const Text(
+                  'New User',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+            ),
+
             SizedBox(height: size.height * 0.1),
+
+            // Ícone biométrico
             GestureDetector(
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Autenticação biométrica em breve')),
+                  const SnackBar(
+                    content: Text('Autenticação biométrica em breve'),
+                  ),
                 );
               },
-              child: const Icon(Icons.fingerprint, size: 60, color: Colors.white),
+              child: const Icon(
+                Icons.fingerprint,
+                size: 60,
+                color: Colors.white,
+              ),
             ),
           ],
         ),
