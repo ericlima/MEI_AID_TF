@@ -1,24 +1,15 @@
-package pt.ipcb.mei.aid.user.model;
+package pt.ipcb.mei.aid.agenda.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 public class UserDTO {
     private long id;
-    @NotBlank(message="o username deve ser fornecido")
     private String userName;
-    @NotBlank(message="o nome é obrigatório")
     private String nome;
-    @Email(message = "email inválido")
     private String email;
-
     private LocalDateTime data_criacao;
     private LocalDateTime data_atualizacao;
-
     private String telefone;
     private String numUtente;
     private LocalDate dataNascto;

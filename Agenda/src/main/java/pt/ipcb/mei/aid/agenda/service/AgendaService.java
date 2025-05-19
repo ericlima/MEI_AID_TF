@@ -1,19 +1,52 @@
 package pt.ipcb.mei.aid.agenda.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.ipcb.mei.aid.agenda.model.Agenda;
 
 import java.time.*;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AgendaService {
+
+    private static final Logger log = LoggerFactory.getLogger(AgendaService.class);
 
     private AgendaRepository agendaRepository;
 
     public AgendaService(AgendaRepository agendaRepository) {
         this.agendaRepository = agendaRepository;
+    }
+
+    public Agenda save(Agenda agenda) {
+        try {
+            return agendaRepository.save(agenda);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
+    }
+
+    public Agenda update(Agenda agenda) {
+        Optional<Agenda> ret = agendaRepository.findById(agenda.getId());
+        if (ret.isPresent()) {
+            return this.save(agenda);
+        }
+        return null;
+    }
+
+    public boolean deleteById(Long id) {
+        try {
+            Optional<Agenda> ret = agendaRepository.findById(id);
+            ret.ifPresent(agenda -> agendaRepository.delete(agenda));
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return false;
+        }
     }
 
     public List<Agenda> buscarEventosDoDia(Long userId, LocalDate data) {

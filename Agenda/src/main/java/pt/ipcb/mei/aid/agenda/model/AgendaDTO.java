@@ -1,8 +1,5 @@
 package pt.ipcb.mei.aid.agenda.model;
 
-import jakarta.persistence.Column;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import java.time.LocalDateTime;
 
 public class AgendaDTO {

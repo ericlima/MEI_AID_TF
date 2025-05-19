@@ -3,15 +3,15 @@ services:
     image: postgres:16
     container_name: postgres
     hostname: postgres
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     networks:
       - aid_network
-    ports:
-      - "5432:5432"
+    # ports:
+    #   - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -27,7 +27,7 @@ services:
       test: ["CMD", "curl -s http://name-server:8761/ping"]
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
   api-gateway:
     build:
@@ -39,7 +39,7 @@ services:
       - "8755:8755"
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
   user:
     build:
@@ -51,11 +51,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/utilizador
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-    ports:
-      - "8010:8010"
+    # ports:
+    #   - "8010:8010"
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
   agenda:
     build:
@@ -67,11 +67,11 @@ services:
       POSTGRES_DB: agenda
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "8040:8040"
+    # ports:
+    #   - "8040:8040"
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
   receitas:
     build:
@@ -83,11 +83,11 @@ services:
       POSTGRES_DB: receitas
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "8020:8020"
+    # ports:
+    #   - "8020:8020"
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
   estoque:
     build:
@@ -99,11 +99,11 @@ services:
       POSTGRES_DB: estoque
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "8050:8050"
+    # ports:
+    #   - "8050:8050"
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
   medicamento:
     build:
@@ -115,11 +115,11 @@ services:
       POSTGRES_DB: medicamento
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "8060:8060"
+    # ports:
+    #   - "8060:8060"
     networks:
       - aid_network
-    restart: unless-stopped
+    restart: always
 
 volumes:
   postgres_data:
