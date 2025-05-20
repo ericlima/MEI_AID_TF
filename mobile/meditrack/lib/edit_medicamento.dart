@@ -1,31 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class NovoMedicamento extends StatefulWidget {
-  const NovoMedicamento({super.key});
+class EditMedicamento extends StatefulWidget {
+  final String label;
+  final String date;
+  final String currentDose;
+  final String total;
+
+  const EditMedicamento({
+    super.key,
+    required this.label,
+    required this.date,
+    required this.currentDose,
+    required this.total,
+  });
 
   @override
-  State<NovoMedicamento> createState() => _NovoMedicamentoState();
+  State<EditMedicamento> createState() => _EditMedicamentoState();
 }
 
-class _NovoMedicamentoState extends State<NovoMedicamento> {
+class _EditMedicamentoState extends State<EditMedicamento> {
   final _formKey = GlobalKey<FormState>();
 
-  final nomeController = TextEditingController();
-  final dosagemController = TextEditingController();
-  final formaController = TextEditingController();
-  final posologiaController = TextEditingController();
-  final quantPrescritaController = TextEditingController();
-  final quantDispensadaController = TextEditingController();
-  final pinAcessoController = TextEditingController();
-  final pinOpcaoController = TextEditingController();
+  late TextEditingController nomeController;
+  late TextEditingController dosagemController;
+  late TextEditingController formaController;
+  late TextEditingController posologiaController;
+  late TextEditingController quantPrescritaController;
+  late TextEditingController quantDispensadaController;
+  late TextEditingController pinAcessoController;
+  late TextEditingController pinOpcaoController;
 
   DateTime? validade;
+
+  @override
+  void initState() {
+    super.initState();
+    nomeController = TextEditingController(text: 'Nome exemplo');
+    dosagemController = TextEditingController(text: '10mg');
+    formaController = TextEditingController(text: 'Comprimido');
+    posologiaController = TextEditingController(text: '1x ao dia');
+    quantPrescritaController = TextEditingController(text: '8');
+    quantDispensadaController = TextEditingController(text: '8');
+    pinAcessoController = TextEditingController();
+    pinOpcaoController = TextEditingController();
+    validade = DateTime.now().add(const Duration(days: 30));
+  }
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Medicamento registrado com sucesso')),
+        const SnackBar(content: Text('Alterações salvas com sucesso')),
       );
     }
   }
@@ -33,14 +58,11 @@ class _NovoMedicamentoState extends State<NovoMedicamento> {
   Future<void> _selectValidade() async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(const Duration(days: 30)),
+      initialDate: validade ?? DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime(2100),
       builder: (context, child) {
-        return Theme(
-          data: ThemeData.dark(),
-          child: child!,
-        );
+        return Theme(data: ThemeData.dark(), child: child!);
       },
     );
     if (picked != null) {
@@ -92,10 +114,6 @@ class _NovoMedicamentoState extends State<NovoMedicamento> {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
       ),
       body: SafeArea(
         child: Column(
@@ -108,7 +126,7 @@ class _NovoMedicamentoState extends State<NovoMedicamento> {
                   child: Column(
                     children: [
                       const Text(
-                        'Novo Medicamento',
+                        'Editar Medicamento',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -164,7 +182,7 @@ class _NovoMedicamentoState extends State<NovoMedicamento> {
                             ),
                           ),
                           child: const Text(
-                            'Submeter',
+                            'Salvar Alterações',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
                         ),

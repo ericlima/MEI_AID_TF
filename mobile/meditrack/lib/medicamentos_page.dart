@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'medicamentos_browse.dart';
 
 class MedicamentosPage extends StatelessWidget {
   const MedicamentosPage({super.key});
@@ -26,16 +27,17 @@ class MedicamentosPage extends StatelessWidget {
             children: [
               const SizedBox(height: 40),
               _HomeButton(
-                text: 'Adicionar receita',
+                text: 'Medicamentos',
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Abrir formulário de receita')),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const MedicamentosBrowse()),
                   );
                 },
               ),
               const SizedBox(height: 20),
               _HomeButton(
-                text: 'Verificar compras',
+                text: 'Verificar necessidades de compras',
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Ver lista de compras')),
@@ -54,10 +56,7 @@ class _HomeButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
 
-  const _HomeButton({
-    required this.text,
-    required this.onTap,
-  });
+  const _HomeButton({required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

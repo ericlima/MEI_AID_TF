@@ -95,15 +95,15 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 ),
-                const SizedBox(height: 16),
-                _HomeButton(
-                  text: 'Análises e Consultas',
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Navegar para Consultas')),
-                    );
-                  },
-                ),
+                const SizedBox(height: 80),
+                // _HomeButton(
+                //   text: 'Análises e Consultas',
+                //   onTap: () {
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(content: Text('Navegar para Consultas')),
+                //     );
+                //   },
+                // ),
                 const SizedBox(height: 24),
               ],
             ),
