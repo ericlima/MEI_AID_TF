@@ -38,6 +38,11 @@ public class AgendaService {
         return null;
     }
 
+    public Agenda findById(Long id) {
+        Optional<Agenda> ret = agendaRepository.findById(id);
+        return ret.orElse(null);
+    }
+
     public boolean deleteById(Long id) {
         try {
             Optional<Agenda> ret = agendaRepository.findById(id);

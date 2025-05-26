@@ -10,8 +10,8 @@ services:
       POSTGRES_PASSWORD: postgres
     networks:
       - aid_network
-    # ports:
-    #   - "5432:5432"
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -51,8 +51,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/utilizador
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-    # ports:
-    #   - "8010:8010"
+    ports:
+      - "8010:8010"
     networks:
       - aid_network
     restart: always
@@ -67,8 +67,8 @@ services:
       POSTGRES_DB: agenda
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    # ports:
-    #   - "8040:8040"
+    ports:
+      - "8040:8040"
     networks:
       - aid_network
     restart: always

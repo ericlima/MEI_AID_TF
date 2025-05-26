@@ -1,5 +1,5 @@
 # Usa imagem base com Java 24
-FROM eclipse-temurin:24-jdk AS builder
+FROM eclipse-temurin:24-alpine-3.21 AS builder
 
 # Define diretório de trabalho dentro do container
 WORKDIR /app
