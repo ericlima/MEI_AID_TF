@@ -72,39 +72,7 @@ services:
     networks:
       - aid_network
     restart: always
-
-  receitas:
-    build:
-        context: ./Receitas
-        dockerfile: Dockerfile
-    container_name: receitas
-    hostname: receitas
-    environment:
-      POSTGRES_DB: receitas
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    # ports:
-    #   - "8020:8020"
-    networks:
-      - aid_network
-    restart: always
-
-  estoque:
-    build:
-        context: ./Estoque
-        dockerfile: Dockerfile
-    container_name: estoque
-    hostname: estoque
-    environment:
-      POSTGRES_DB: estoque
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    # ports:
-    #   - "8050:8050"
-    networks:
-      - aid_network
-    restart: always
-
+  
   medicamento:
     build:
         context: ./Medicamento
@@ -112,11 +80,11 @@ services:
     container_name: medicamento
     hostname: medicamento
     environment:
-      POSTGRES_DB: medicamento
+      POSTGRES_DB: medicamentos
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    # ports:
-    #   - "8060:8060"
+    ports:
+      - "8060:8060"
     networks:
       - aid_network
     restart: always

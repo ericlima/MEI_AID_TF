@@ -1,4 +1,4 @@
-package pt.ipcb.mei.aid.user.model;
+package pt.ipcb.mei.aid.medicamento.model;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
