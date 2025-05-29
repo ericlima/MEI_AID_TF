@@ -38,7 +38,6 @@ public class User extends Auditable {
     @Column(nullable = true, insertable = false, updatable = false)
     private String pin;
     @NotNull(message = "A data de aceitação dos termos é obrigatória")
-    @PastOrPresent(message = "A data de aceitação não pode estar no futuro")
     private LocalDateTime terms;
 
     @Column(nullable = true)
