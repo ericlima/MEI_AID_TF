@@ -165,14 +165,14 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
 
-            if (user.get().getPin().isEmpty()) {
+            /*if (user.get().getPin().isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-            }
+            }*/
 
             // verifica o pin ja existente
-            if (!userDTO.getPin().equals(user.get().getPin())) {
+            /*if (!userDTO.getPin().equals(user.get().getPin())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-            }
+            }*/
 
             userRepository.updatePinById(user.get().getId(), userDTO.getNewPin());
 

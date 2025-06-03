@@ -1,4 +1,4 @@
-package pt.ipcb.mei.aid.agenda.config;
+package pt.ipcb.mei.aid.medicamento.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

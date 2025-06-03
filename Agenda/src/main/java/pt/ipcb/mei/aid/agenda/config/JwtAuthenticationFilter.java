@@ -1,4 +1,4 @@
-package pt.ipcb.mei.aid.user.cobfig;
+package pt.ipcb.mei.aid.agenda.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @Component

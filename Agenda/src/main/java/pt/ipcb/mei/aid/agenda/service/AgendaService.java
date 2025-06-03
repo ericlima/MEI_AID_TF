@@ -2,9 +2,9 @@ package pt.ipcb.mei.aid.agenda.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pt.ipcb.mei.aid.agenda.model.Agenda;
+import pt.ipcb.mei.aid.agenda.repository.AgendaRepository;
 
 import java.time.*;
 import java.util.List;

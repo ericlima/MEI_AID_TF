@@ -1,4 +1,4 @@
-package pt.ipcb.mei.aid.agenda.config;
+package pt.ipcb.mei.aid.medicamento.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
