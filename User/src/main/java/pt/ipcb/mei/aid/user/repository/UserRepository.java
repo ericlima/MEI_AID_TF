@@ -1,4 +1,4 @@
-package pt.ipcb.mei.aid.user.service;
+package pt.ipcb.mei.aid.user.repository;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;

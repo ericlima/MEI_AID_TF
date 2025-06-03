@@ -10,8 +10,8 @@ services:
       POSTGRES_PASSWORD: postgres
     networks:
       - aid_network
-    #ports:
-    #  - "5432:5432"
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
@@ -21,17 +21,15 @@ services:
         dockerfile: Dockerfile
     container_name: name-server
     hostname: name-server
-    #ports:
-    #  - "8761:8761"
-    healthcheck:
-      test: ["CMD", "curl -s http://name-server:8761/ping"]
+    ports:
+      - "8761:8761"
     networks:
       - aid_network
     restart: always
 
   api-gateway:
     build:
-        context: ./API_Cloud_Gateway
+        context: ./apigateway
         dockerfile: Dockerfile
     container_name: api-gateway
     hostname: api-gateway
@@ -51,8 +49,8 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/utilizador
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-    #ports:
-    #  - "8010:8010"
+    ports:
+      - "8010:8010"
     networks:
       - aid_network
     restart: always
@@ -67,8 +65,8 @@ services:
       POSTGRES_DB: agenda
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    #ports:
-    #  - "8040:8040"
+    ports:
+      - "8040:8040"
     networks:
       - aid_network
     restart: always
@@ -83,8 +81,8 @@ services:
       POSTGRES_DB: medicamentos
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    #ports:
-    #  - "8060:8060"
+    ports:
+      - "8060:8060"
     networks:
       - aid_network
     restart: always

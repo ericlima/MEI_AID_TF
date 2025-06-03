@@ -1,15 +1,12 @@
-# Usa imagem base com Java 24
-FROM eclipse-temurin:24-alpine-3.21 AS builder
-
-# Define diretório de trabalho dentro do container
+# Etapa 1 - Build da aplicação usando Maven com Java 24
+FROM maven:3.9-amazoncorretto-24-alpine AS builder
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copia o JAR gerado para dentro do container
-COPY target/*.jar app.jar
-#COPY src/main/resources/mei_aid.jks mei_aid.jks
-
-# Expõe a porta que o Eureka Server usará
+# Etapa 2 - Imagem final com Amazon Corretto 24
+FROM amazoncorretto:24-alpine-jdk
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8010
-
-# Define o comando de inicialização da aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]

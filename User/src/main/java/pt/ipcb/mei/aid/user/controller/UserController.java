@@ -1,13 +1,11 @@
 package pt.ipcb.mei.aid.user.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pt.ipcb.mei.aid.user.model.*;
-import pt.ipcb.mei.aid.user.service.UserRepository;
+import pt.ipcb.mei.aid.user.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.slf4j.Logger;
@@ -128,22 +126,25 @@ public class UserController {
     }
 
     @PutMapping("/pincreate")
-    public ResponseEntity<?> createPin(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<?> createPin(@RequestBody AuthController.LoginRequest userDTO) {
         try {
 
-            Optional<User> user = userRepository.findById(userDTO.getId());
+            Optional<User> user = userRepository.findUserByUserName(userDTO.getUsername());
 
             if (user.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
 
-            if (!user.get().getPin().isEmpty()) {
+            String passwordHash = passwordEncoder.encode(userDTO.getPassword());
+            User usr = user.get();
+
+            if (usr.getPin() != null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
 
-            String pinHash = passwordEncoder.encode(userDTO.getPin());
+            String pinHash = passwordEncoder.encode(userDTO.getPassword());
 
-            userRepository.updatePinById(userDTO.getId(), pinHash);
+            userRepository.updatePinById(user.get().getId(), pinHash);
 
             return ResponseEntity.status(HttpStatus.OK).build();
 
