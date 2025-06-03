@@ -1,4 +1,4 @@
-package pt.ipcb.mei.aid.agenda.service;
+package pt.ipcb.mei.aid.agenda.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import pt.ipcb.mei.aid.agenda.model.Agenda;
