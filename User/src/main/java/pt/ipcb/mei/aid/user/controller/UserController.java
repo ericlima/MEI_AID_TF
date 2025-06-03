@@ -138,9 +138,10 @@ public class UserController {
             String passwordHash = passwordEncoder.encode(userDTO.getPassword());
             User usr = user.get();
 
-            if (usr.getPin() != null) {
+            // desabilitado para testes - o objetivo deste if e so permitir create caso
+            /*if (usr.getPin() != null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-            }
+            }*/
 
             String pinHash = passwordEncoder.encode(userDTO.getPassword());
 
