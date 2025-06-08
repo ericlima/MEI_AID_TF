@@ -1,0 +1,95 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - aid_network
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  name-server:
+    build:
+        context: ./NamingServer
+        dockerfile: Dockerfile
+    container_name: name-server
+    hostname: name-server
+    ports:
+      - "8761:8761"
+    networks:
+      - aid_network
+    restart: always
+
+  api-gateway:
+    build:
+        context: ./apigateway
+        dockerfile: Dockerfile
+    container_name: api-gateway
+    hostname: api-gateway
+    ports:
+      - "8755:8755"
+    networks:
+      - aid_network
+    restart: always
+
+  user:
+    build:
+        context: ./User
+        dockerfile: Dockerfile
+    container_name: user
+    hostname: user
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/utilizador
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8010:8010"
+    networks:
+      - aid_network
+    restart: always
+
+  agenda:
+    build:
+        context: ./Agenda
+        dockerfile: Dockerfile
+    container_name: agenda
+    hostname: agenda
+    environment:
+      POSTGRES_DB: agenda
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8040:8040"
+    networks:
+      - aid_network
+    restart: always
+  
+  medicamento:
+    build:
+        context: ./Medicamento
+        dockerfile: Dockerfile
+    container_name: medicamento
+    hostname: medicamento
+    environment:
+      POSTGRES_DB: medicamentos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "8060:8060"
+    networks:
+      - aid_network
+    restart: always
+
+volumes:
+  postgres_data:
+
+networks:
+    aid_network:
+   
