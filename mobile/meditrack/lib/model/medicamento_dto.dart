@@ -1,30 +1,34 @@
 class MedicamentoDTO {
-  final int id;
-  final int userId;
-  final String descricao;
-  final String posologia;
-  final String preditor;
-  final String local;
-  final DateTime inicio;
-  final DateTime? fim;
-  final String pinacesso;
-  final String pinopcao;
-  final DateTime? datahoraCriacao;
-  final DateTime? datahoraAlteracao;
+  int? id;
+  int? userId;
+  String? descricao;
+  String? posologia;
+  String? preditor;
+  String? local;
+  DateTime? inicio;
+  DateTime? fim;
+  String? pinacesso;
+  String? pinopcao;
+  int? quantEmb;
+  int? quantDia;
+  int? quantPrescrita;
+  int? quantDispensada;
 
   MedicamentoDTO({
-    required this.id,
-    required this.userId,
-    required this.descricao,
-    required this.posologia,
-    required this.preditor,
-    required this.local,
-    required this.inicio,
+    this.id,
+    this.userId,
+    this.descricao,
+    this.posologia,
+    this.preditor,
+    this.local,
+    this.inicio,
     this.fim,
-    required this.pinacesso,
-    required this.pinopcao,
-    this.datahoraCriacao,
-    this.datahoraAlteracao,
+    this.pinacesso,
+    this.pinopcao,
+    this.quantEmb,
+    this.quantDia,
+    this.quantPrescrita,
+    this.quantDispensada,
   });
 
   factory MedicamentoDTO.fromJson(Map<String, dynamic> json) {
@@ -35,33 +39,38 @@ class MedicamentoDTO {
       posologia: json['posologia'],
       preditor: json['preditor'],
       local: json['local'],
-      inicio: DateTime.parse(json['inicio']),
+      inicio: json['inicio'] != null ? DateTime.tryParse(json['inicio']) : null,
       fim: json['fim'] != null ? DateTime.tryParse(json['fim']) : null,
       pinacesso: json['pinacesso'],
       pinopcao: json['pinopcao'],
-      datahoraCriacao: json['datahoraCriacao'] != null
-          ? DateTime.tryParse(json['datahoraCriacao'])
-          : null,
-      datahoraAlteracao: json['datahoraAlteracao'] != null
-          ? DateTime.tryParse(json['datahoraAlteracao'])
-          : null,
+      quantEmb: json['quantEmb'],
+      quantDia: json['quantDia'],
+      quantPrescrita: json['quantPrescrita'],
+      quantDispensada: json['quantDispensada'],
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'id': id,
+    final map = {
       'userId': userId,
       'descricao': descricao,
       'posologia': posologia,
       'preditor': preditor,
       'local': local,
-      'inicio': inicio.toIso8601String().split('T').first,
+      'inicio': inicio?.toIso8601String().split('T').first,
       'fim': fim?.toIso8601String().split('T').first,
       'pinacesso': pinacesso,
       'pinopcao': pinopcao,
-      'datahoraCriacao': datahoraCriacao?.toIso8601String(),
-      'datahoraAlteracao': datahoraAlteracao?.toIso8601String(),
+      'quantEmb': quantEmb,
+      'quantDia': quantDia,
+      'quantPrescrita': quantPrescrita,
+      'quantDispensada': quantDispensada,
     };
+
+    if (id != null) {
+      map['id'] = id;
+    }
+
+    return map;
   }
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:meditrack/calendario/funcoes_calendario.dart';
 import 'package:meditrack/exception/token_invalido_exception.dart';
 import 'package:meditrack/model/constants.dart';
 import 'package:meditrack/model/loginrequest_dto.dart';

@@ -15,6 +15,10 @@ public class MedicamentoDTO {
     private LocalDate fim;
     private String pinacesso;
     private String pinopcao;
+    private Integer quantEmb;
+    private Integer quantDia;
+    private Integer quantPrescrita;
+    private Integer quantDispensada;
     private LocalDateTime datahoraCriacao;
     private LocalDateTime datahoraAlteracao;
 
@@ -116,5 +120,37 @@ public class MedicamentoDTO {
 
     public void setDatahoraAlteracao(LocalDateTime datahoraAlteracao) {
         this.datahoraAlteracao = datahoraAlteracao;
+    }
+
+    public Integer getQuantEmb() {
+        return quantEmb;
+    }
+
+    public void setQuantEmb(Integer quantEmb) {
+        this.quantEmb = quantEmb;
+    }
+
+    public Integer getQuantDia() {
+        return quantDia;
+    }
+
+    public void setQuantDia(Integer quantDia) {
+        this.quantDia = quantDia;
+    }
+
+    public Integer getQuantPrescrita() {
+        return quantPrescrita;
+    }
+
+    public void setQuantPrescrita(Integer quantPrescrita) {
+        this.quantPrescrita = quantPrescrita;
+    }
+
+    public Integer getQuantDispensada() {
+        return quantDispensada;
+    }
+
+    public void setQuantDispensada(Integer quantDispensada) {
+        this.quantDispensada = quantDispensada;
     }
 }

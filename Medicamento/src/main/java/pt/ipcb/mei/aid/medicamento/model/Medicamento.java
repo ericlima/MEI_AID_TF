@@ -35,6 +35,15 @@ public class Medicamento extends Auditable {
     private String pinacesso;
     @Column(nullable = true)
     private String pinopcao;
+    @Column(nullable = true)
+    private Integer quantEmb;
+    @Column(nullable = true)
+    private Integer quantDia;
+    @Column(nullable = true)
+    private Integer quantPrescrita;
+    @Column(nullable = true)
+    private Integer quantDispensada;
+
 
     public Medicamento() {
     }
@@ -117,5 +126,37 @@ public class Medicamento extends Auditable {
 
     public void setPinopcao(String pinopcao) {
         this.pinopcao = pinopcao;
+    }
+
+    public Integer getQuantEmb() {
+        return quantEmb;
+    }
+
+    public void setQuantEmb(Integer quantEmb) {
+        this.quantEmb = quantEmb;
+    }
+
+    public Integer getQuantDia() {
+        return quantDia;
+    }
+
+    public void setQuantDia(Integer quantDia) {
+        this.quantDia = quantDia;
+    }
+
+    public Integer getQuantPrescrita() {
+        return quantPrescrita;
+    }
+
+    public void setQuantPrescrita(Integer quantPrescrita) {
+        this.quantPrescrita = quantPrescrita;
+    }
+
+    public Integer getQuantDispensada() {
+        return quantDispensada;
+    }
+
+    public void setQuantDispensada(Integer quantDispensada) {
+        this.quantDispensada = quantDispensada;
     }
 }

@@ -10,10 +10,10 @@ class Constants {
   static const String userNovo = '$baseUurl/user/api/novo';
 
   static const String agendaAPI = '$baseUurl/agenda/api';
-  //static const String agendaAPI = 'http://10.0.2.2:8040/api';
   static const String agendaMes = '$baseUurl/agenda/api/month/';
   static const String agendaDia = '$baseUurl/agenda/api/day/';
 
-  static const String medicamentoAPI = '$baseUurl/medicamento/api/';
+  static const String medicamentoAPI = '$baseUurl/medicamento/api';
+  static const String medicamentoByUserId = '$baseUurl/medicamento/api/user';
 
 }
